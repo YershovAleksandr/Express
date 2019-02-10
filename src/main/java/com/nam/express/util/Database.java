@@ -19,6 +19,52 @@ public class Database {
         initOrderTable();
         initCourierTaskTable();
         initOperatorTaskTable();
+
+
+        Order order = new Order();
+        order.setDescription("Description 1");
+        OrderService.createOrder(order);
+
+        Order order2 = new Order();
+        order2.setDescription("Description 2");
+        OrderService.createOrder(order2);
+
+        Order order3 = new Order();
+        order3.setDescription("Description 3");
+        OrderService.createOrder(order3);
+
+        Order order4 = new Order();
+        order4.setDescription("Description 4");
+        OrderService.createOrder(order4);
+
+        Order order5 = new Order();
+        order5.setDescription("Description 5");
+        OrderService.createOrder(order5);
+
+        CourierTask courierTask = new CourierTask();
+        courierTask.setDescription("Description 1");
+        courierTask.setOrderId(1);
+        CourierService.createTask(courierTask);
+
+        CourierTask courierTask2 = new CourierTask();
+        courierTask2.setDescription("Description 2");
+        courierTask2.setOrderId(2);
+        CourierService.createTask(courierTask2);
+
+        CourierTask courierTask3 = new CourierTask();
+        courierTask3.setDescription("Description 3");
+        courierTask3.setOrderId(3);
+        CourierService.createTask(courierTask3);
+
+        CourierTask courierTask4 = new CourierTask();
+        courierTask4.setDescription("Description 4");
+        courierTask4.setOrderId(4);
+        CourierService.createTask(courierTask4);
+
+        CourierTask courierTask5 = new CourierTask();
+        courierTask5.setDescription("Description 5");
+        courierTask5.setOrderId(5);
+        CourierService.createTask(courierTask5);
     }
 
     private static void initOrderTable(){
@@ -38,22 +84,6 @@ public class Database {
         } catch(Exception e){
             log.error("DB Error", e);
         }
-
-        //TODO Create Order Factory;
-        Order order = new Order();
-        order.setId(1);
-        order.setDescription("Description1");
-        OrderService.createOrder(order);
-
-        Order order2 = new Order();
-        order2.setId(2);
-        order2.setDescription("Description2");
-        OrderService.createOrder(order2);
-
-        Order order3 = new Order();
-        order3.setId(3);
-        order3.setDescription("Description3");
-        OrderService.createOrder(order3);
     }
 
     private static void initCourierTaskTable(){
@@ -75,20 +105,6 @@ public class Database {
         } catch(Exception e){
             log.error("DB Error", e);
         }
-
-        //TODO Create CourierTask Factory;
-
-        CourierTask courierTask = new CourierTask();
-        courierTask.setId(1);
-        courierTask.setDescription("Description 1");
-        courierTask.setOrderId(1);
-        CourierService.createTask(courierTask);
-
-        CourierTask courierTask2 = new CourierTask();
-        courierTask2.setId(2);
-        courierTask2.setDescription("Description 2");
-        courierTask2.setOrderId(3);
-        CourierService.createTask(courierTask2);
     }
 
     private static void initOperatorTaskTable(){
