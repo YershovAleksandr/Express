@@ -1,6 +1,7 @@
 package com.nam.express.controller;
 
 import com.nam.express.service.CourierService;
+import com.nam.express.service.OperatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -14,19 +15,23 @@ public class CourierController {
     private static Logger log = LoggerFactory.getLogger(CourierController.class);
 
     @GetMapping("/courier")
-    public String home(Model model){
+    public String courier(Model model){
         log.info("Courier");
 
-        CourierService.ViewOrders();
+        log.info("Get All Task" + CourierService.getAllTask().toString());
+
+        model.addAttribute("taskList", CourierService.getAllTask());
 
         return "courier";
     }
 
-    @RequestMapping("/courier")
+    @RequestMapping("/postpone")
     public String postpone(@RequestParam(value = "id")String id, Model model){
         log.info("Postpone orderId = " + id);
 
-        CourierService.PostponDelivery(id);
+        //TODO ADD date to transaction
+        CourierService.deleteTaskByOrderId(id);
+        OperatorService.createTaskByOrderId(id);
 
         return "redirect:/courier";
     }
