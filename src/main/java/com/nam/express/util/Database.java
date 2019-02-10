@@ -74,7 +74,7 @@ public class Database {
             Statement st = cn.createStatement();
 
             st.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
-            st.executeUpdate("DROP TABLE orderdb;");
+            st.executeUpdate("DROP TABLE IF EXISTS orderdb;");
             st.executeUpdate("CREATE TABLE IF NOT EXISTS orderdb(" +
                     "orderdb_id int NOT NULL AUTO_INCREMENT," +
                     "orderdb_description varchar(50) NOT NULL," +
@@ -92,7 +92,7 @@ public class Database {
         try(Connection cn = DataSource.getConnection()){
             Statement st = cn.createStatement();
 
-            st.executeUpdate("DROP TABLE courierdb;");
+            st.executeUpdate("DROP TABLE IF EXISTS courierdb;");
             st.executeUpdate("CREATE TABLE IF NOT EXISTS courierdb(" +
                     "courierdb_id int NOT NULL AUTO_INCREMENT," +
                     "courierdb_orderid int NOT NULL," +
@@ -113,7 +113,7 @@ public class Database {
         try(Connection cn = DataSource.getConnection()){
             Statement st = cn.createStatement();
 
-            st.executeUpdate("DROP TABLE operatordb;");
+            st.executeUpdate("DROP TABLE IF EXISTS operatordb;");
             st.executeUpdate("CREATE TABLE IF NOT EXISTS operatordb(" +
                     "operatordb_id int NOT NULL AUTO_INCREMENT," +
                     "operatordb_orderid int NOT NULL," +
