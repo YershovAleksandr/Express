@@ -1,7 +1,10 @@
 package com.nam.express.controller;
 
+import com.nam.express.model.CourierTask;
+import com.nam.express.model.Order;
 import com.nam.express.service.CourierService;
 import com.nam.express.service.OperatorService;
+import com.nam.express.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -30,8 +33,16 @@ public class CourierController {
         log.info("Postpone orderId = " + id);
 
         //TODO ADD date to transaction
-        CourierService.deleteTaskByOrderId(id);
-        OperatorService.createTaskByOrderId(id);
+
+        CourierTask courierTask = CourierService.getTaskById(id);
+
+        if (courierTask != null) {
+            Order order = OrderService.getOrderById(String.valueOf(courierTask.getOrderId()));
+
+            CourierService.deleteTaskByOrder(order);
+
+            OperatorService.createTaskByOrder(order);
+        }
 
         return "redirect:/courier";
     }

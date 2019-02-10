@@ -2,6 +2,7 @@ package com.nam.express.service;
 
 import com.nam.express.dao.CourierTaskDao;
 import com.nam.express.model.CourierTask;
+import com.nam.express.model.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,30 +13,28 @@ public class CourierService{
     private static CourierTaskDao courierTaskDao = new CourierTaskDao();
 
     public static List<CourierTask> getAllTask(){
-        log.info("View Courier Task");
-
         return courierTaskDao.getAll();
     }
 
-    public static void createTask(CourierTask courierTask){
-
-
-        courierTaskDao.create(courierTask);
-    }
-
-    public static void deleteTaskByOrderId(String id){
-        log.info("Postpone Courier Task id = " + id);
-
+    public static CourierTask getTaskById(String id){
         int intId;
 
         try {
             intId = Integer.parseInt(id);
         } catch(NumberFormatException e){
-            log.error("Illegal task id = " + id);
+            log.error("Illegal id = " + id);
 
-            return;
+            return null;
         }
 
-        courierTaskDao.delete(intId);
+        return courierTaskDao.get(intId);
+    }
+
+    public static void createTask(CourierTask courierTask){
+        courierTaskDao.create(courierTask);
+    }
+
+    public static void deleteTaskByOrder(Order order){
+        courierTaskDao.deleteByOrderId(order.getId());
     }
 }

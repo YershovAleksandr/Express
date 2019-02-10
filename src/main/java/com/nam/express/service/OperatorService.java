@@ -2,6 +2,7 @@ package com.nam.express.service;
 
 import com.nam.express.dao.OperatorTaskDao;
 import com.nam.express.model.OperatorTask;
+import com.nam.express.model.Order;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,19 +18,9 @@ public class OperatorService {
         return operatorTaskDao.getAll();
     }
 
-    public static void createTaskByOrderId(String id){
-        log.info("Operator Create Task id = " + id);
+    public static void createTaskByOrder(Order order){
+        log.info("Operator Create Task Order -> " + order);
 
-        int intId;
-
-        try {
-            intId = Integer.parseInt(id);
-        } catch(NumberFormatException e){
-            log.error("Illegal task id = " + id);
-
-            return;
-        }
-
-        operatorTaskDao.create(intId);
+        operatorTaskDao.createByOrderId(order.getId());
     }
 }

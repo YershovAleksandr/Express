@@ -15,4 +15,19 @@ public class OrderService {
         orderDao.create(order);
     }
 
+    public static Order getOrderById(String id){
+        log.info("Get Order id = " + id);
+
+        int intId;
+
+        try {
+            intId = Integer.parseInt(id);
+        } catch(NumberFormatException e){
+            log.error("Illegal order id = " + id);
+
+            return null;
+        }
+
+        return orderDao.get(intId);
+    }
 }

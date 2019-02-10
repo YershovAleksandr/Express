@@ -1,6 +1,7 @@
 package com.nam.express.dao;
 
 import com.nam.express.model.CourierTask;
+import com.nam.express.model.Order;
 import com.nam.express.util.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,6 +41,31 @@ public class CourierTaskDao {
         return courierTaskList;
     }
 
+    public CourierTask get(int id){
+        log.info("Get Courier Task id = " + id);
+
+        CourierTask courierTask = null;
+
+        try(Connection con = DataSource.getConnection()) {
+            PreparedStatement pst = con.prepareStatement("SELECT * FROM courierdb WHERE courierdb_id = ?");
+            pst.setInt(1, id);
+
+            ResultSet rs = pst.executeQuery();
+
+            if(rs.next()){
+                courierTask = new CourierTask();
+
+                courierTask.setId(rs.getInt("courierdb_id"));
+                courierTask.setOrderId(rs.getInt("courierdb_orderid"));
+                courierTask.setDescription(rs.getString("courierdb_description"));
+            }
+        }catch (Exception e){
+            log.error("DB Error", e);
+        }
+
+        return courierTask;
+    }
+
     public int create(CourierTask courierTask){
         log.info("Create Courier Task");
 
@@ -59,13 +85,13 @@ public class CourierTaskDao {
         return status;
     }
 
-    public int delete(int id){
+    public int deleteByOrderId(int id){
         log.info("Delete Courier Task");
 
         int status = -1;
 
         try(Connection con = DataSource.getConnection()){
-            PreparedStatement pst = con.prepareStatement("DELETE FROM courierdb WHERE courierdb_id = ?");
+            PreparedStatement pst = con.prepareStatement("DELETE FROM courierdb WHERE courierdb_orderid = ?");
 
             pst.setInt(1, id);
 

@@ -15,14 +15,12 @@
         <th>Id</th>
         <th>OrderId</th>
         <th>Date</th>
-        <th>Description</th>
     </tr>
     <th:block th:each="task : ${taskList}">
         <tr>
             <td th:text="${task.getId()}"></td>
             <td th:text="${task.getOrderId()}"></td>
             <td th:text="${task.getDate()}"></td>
-            <td th:text="${task.getDescription()}"></td>
         </tr>
     </th:block>
 </table>

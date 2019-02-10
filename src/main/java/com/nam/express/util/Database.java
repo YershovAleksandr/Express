@@ -15,6 +15,7 @@ public class Database {
 
         initOrderDB();
         initCourierTaskDB();
+        initOperatorTaskDB();
     }
 
     private static void initOrderDB(){
@@ -49,5 +50,9 @@ public class Database {
         courierTask2.setDescription("Description 2");
         courierTask2.setOrderId(3);
         CourierService.createTask(courierTask2);
+    }
+
+    private static void initOperatorTaskDB(){
+        //
     }
 }
