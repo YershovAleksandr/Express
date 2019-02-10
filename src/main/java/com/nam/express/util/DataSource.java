@@ -9,17 +9,18 @@ import java.sql.DriverManager;
 public class DataSource {
     private static Logger log = LoggerFactory.getLogger(DataSource.class);
 
+    private static String driver = "com.mysql.cj.jdbc.Driver";
+    private static String url = "jdbc:mysql://localhost:3306/express?useUnicode=true&characterEncoding=utf-8";
+    private static String username = "testuser";
+    private static String password = "5550635";
+
     public static Connection getConnection(){
         Connection con = null;
 
-        String url = "jdbc:mysql://localhost:3306/express?useUnicode=true&characterEncoding=utf-8";
-        String user = "testuser";
-        String pass = "5550635";
-
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName(driver);
 
-            con = DriverManager.getConnection(url, user, pass);
+            con = DriverManager.getConnection(url, username, password);
         }catch(Exception e){
             log.error("DB Error", e);
         }
