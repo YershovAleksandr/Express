@@ -1,7 +1,6 @@
 package com.nam.express.dao;
 
 import com.nam.express.model.CourierTask;
-import com.nam.express.model.Order;
 import com.nam.express.util.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -12,14 +12,12 @@ public class OperatorService {
     private static Logger log = LoggerFactory.getLogger(OperatorService.class);
     private static OperatorTaskDao operatorTaskDao = new OperatorTaskDao();
 
-    public static List<OperatorTask> viewTask(){
-        log.info("View Operator Task");
-
+    public static List<OperatorTask> getAllTask(){
         return operatorTaskDao.getAll();
     }
 
     public static void createTaskByOrder(Order order){
-        log.info("Operator Create Task Order -> " + order);
+        log.info("Operator create task -> order " + order);
 
         operatorTaskDao.createByOrderId(order.getId());
     }

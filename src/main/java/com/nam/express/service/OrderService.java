@@ -10,14 +10,10 @@ public class OrderService {
     private static OrderDao orderDao = new OrderDao();
 
     public static void createOrder(Order order){
-        log.info("Create Order");
-
         orderDao.create(order);
     }
 
     public static Order getOrderById(String id){
-        log.info("Get Order id = " + id);
-
         int intId;
 
         try {

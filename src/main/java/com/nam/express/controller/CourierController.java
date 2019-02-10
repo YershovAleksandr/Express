@@ -19,9 +19,7 @@ public class CourierController {
 
     @GetMapping("/courier")
     public String courier(Model model){
-        log.info("Courier");
-
-        log.info("Get All Task" + CourierService.getAllTask().toString());
+        log.info("Couriers tasks -> " + CourierService.getAllTask().toString());
 
         model.addAttribute("taskList", CourierService.getAllTask());
 
@@ -30,7 +28,7 @@ public class CourierController {
 
     @RequestMapping("/postpone")
     public String postpone(@RequestParam(value = "id")String id, Model model){
-        log.info("Postpone orderId = " + id);
+        log.info("Postpone -> orderId = " + id);
 
         //TODO ADD date to transaction
 

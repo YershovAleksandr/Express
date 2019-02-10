@@ -1,5 +1,6 @@
 package com.nam.express.controller;
 
+import com.nam.express.service.CourierService;
 import com.nam.express.service.OperatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +14,9 @@ public class OperatorController {
 
     @GetMapping("/operator")
     public String operator(Model model){
-        log.info("Operator");
+        log.info("Operator tasks -> " + OperatorService.getAllTask().toString());
 
-        model.addAttribute("taskList", OperatorService.viewTask());
+        model.addAttribute("taskList", OperatorService.getAllTask());
 
         return "operator";
     }
