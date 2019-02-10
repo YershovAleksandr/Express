@@ -16,6 +16,10 @@ public class OperatorService {
         return operatorTaskDao.getAll();
     }
 
+    public static List<OperatorTask> getTaskByQuery(String query){
+        return operatorTaskDao.get(query);
+    }
+
     public static void createTaskByOrder(Order order){
         log.info("Operator create task -> order " + order);
 

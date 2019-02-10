@@ -41,6 +41,13 @@ public class OperatorTaskDao {
         return operatorTaskList;
     }
 
+    public List<OperatorTask> get(String query){
+        log.info("Get Task Operator Query = " + query);
+
+
+        return null;
+    }
+
     public int createByOrderId(int id){
         log.info("Create Operator Task");
 
