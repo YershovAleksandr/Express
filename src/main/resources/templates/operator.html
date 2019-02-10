@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Оператор Call-центра</title>
@@ -7,6 +7,27 @@
 <body>
 
 <h1>Hello Operator!</h1>
+<hr>
+<a href="/courier">Курьер</a>
+<hr>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>OrderId</th>
+        <th>Date</th>
+        <th>Description</th>
+    </tr>
+    <th:block th:each="task : ${taskList}">
+        <tr>
+            <td th:text="${task.getId()}"></td>
+            <td th:text="${task.getOrderId()}"></td>
+            <td th:text="${task.getDate()}"></td>
+            <td th:text="${task.getDescription()}"></td>
+        </tr>
+    </th:block>
+</table>
+
+<hr>
 
 </body>
 </html>
