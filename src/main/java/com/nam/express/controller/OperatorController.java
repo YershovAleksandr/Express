@@ -12,10 +12,10 @@ public class OperatorController {
     private static Logger log = LoggerFactory.getLogger(OperatorController.class);
 
     @GetMapping("/operator")
-    public String home(Model model){
+    public String operator(Model model){
         log.info("Operator");
 
-        OperatorService.ViewOrders();
+        model.addAttribute("taskList", OperatorService.viewTask());
 
         return "operator";
     }
