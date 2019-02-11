@@ -1,4 +1,4 @@
-package com.nam.express.dao;
+package com.nam.express.dao.mapper;
 
 import com.nam.express.model.Order;
 import org.springframework.jdbc.core.RowMapper;

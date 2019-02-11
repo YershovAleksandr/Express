@@ -1,5 +1,6 @@
 package com.nam.express.dao;
 
+import com.nam.express.dao.mapper.OrderMapper;
 import com.nam.express.model.Order;
 import com.nam.express.util.JDBCSource;
 import org.slf4j.Logger;
