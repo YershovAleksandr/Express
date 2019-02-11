@@ -1,16 +1,20 @@
 package com.nam.express.dao;
 
 import com.nam.express.model.OperatorTask;
-import com.nam.express.util.DataSource;
+import com.nam.express.util.DataSource2;
+import com.nam.express.util.JDBCSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OperatorTaskDao {
     private Logger log = LoggerFactory.getLogger(OperatorTaskDao.class);
@@ -20,7 +24,7 @@ public class OperatorTaskDao {
 
         List<OperatorTask> operatorTaskList = null;
 
-        try(Connection con = DataSource.getConnection()) {
+        try(Connection con = DataSource2.getConnection()) {
             PreparedStatement pst = con.prepareStatement("SELECT * FROM operatordb");
             ResultSet rs = pst.executeQuery();
 
@@ -48,22 +52,15 @@ public class OperatorTaskDao {
         return null;
     }
 
-    public int createByOrderId(int id){
+    public void createByOrderId(int id){
         log.info("Create Operator Task");
 
-        int status = -1;
+        SimpleJdbcInsert insert = new SimpleJdbcInsert(JDBCSource.getDataSource()).withTableName("operatordb");
 
-        try(Connection con = DataSource.getConnection()){
-            PreparedStatement pst = con.prepareStatement("INSERT INTO operatordb(operatordb_orderid, operatordb_date) VALUES (?, ?)");
+        Map<String, Object> param = new HashMap<>();
+        param.put("operatordb_orderid", id);
+        param.put("operatordb_date", new Timestamp(System.currentTimeMillis()));
 
-            pst.setInt(1, id);
-            pst.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
-
-            status = pst.executeUpdate();
-        }catch (Exception e){
-            log.error("DB Error", e);
-        }
-
-        return status;
+        insert.execute(param);
     }
 }
