@@ -70,7 +70,7 @@ public class Database {
     private static void initOrderTable(){
         log.info("Init Order Table");
 
-        try(Connection cn = DataSource.getConnection()){
+        try(Connection cn = DataSource2.getConnection()){
             Statement st = cn.createStatement();
 
             st.executeUpdate("SET FOREIGN_KEY_CHECKS=0;");
@@ -89,7 +89,7 @@ public class Database {
     private static void initCourierTaskTable(){
         log.info("Init Courier Table");
 
-        try(Connection cn = DataSource.getConnection()){
+        try(Connection cn = DataSource2.getConnection()){
             Statement st = cn.createStatement();
 
             st.executeUpdate("DROP TABLE IF EXISTS courierdb;");
@@ -110,7 +110,7 @@ public class Database {
     private static void initOperatorTaskTable(){
         log.info("Init Operator Table");
 
-        try(Connection cn = DataSource.getConnection()){
+        try(Connection cn = DataSource2.getConnection()){
             Statement st = cn.createStatement();
 
             st.executeUpdate("DROP TABLE IF EXISTS operatordb;");
