@@ -2,15 +2,12 @@ package com.nam.express.dao;
 
 import com.nam.express.dao.mapper.CourierTaskMapper;
 import com.nam.express.model.CourierTask;
-import com.nam.express.util.DataSource2;
 import com.nam.express.util.JDBCSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
