@@ -30,15 +30,12 @@ public class CourierController {
     public String postpone(@RequestParam(value = "id")String id, Model model){
         log.info("Postpone -> orderId = " + id);
 
-        //TODO ADD date to transaction
-
         CourierTask courierTask = CourierService.getTaskById(id);
 
         if (courierTask != null) {
-            Order order = OrderService.getOrderById(String.valueOf(courierTask.getOrderId()));
+            Order order = OrderService.getOrderById(courierTask.getOrderId());
 
             CourierService.deleteTaskByOrder(order);
-
             OperatorService.createTaskByOrder(order);
         }
 

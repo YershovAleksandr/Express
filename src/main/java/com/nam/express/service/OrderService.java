@@ -13,17 +13,7 @@ public class OrderService {
         orderDao.create(order);
     }
 
-    public static Order getOrderById(String id){
-        int intId;
-
-        try {
-            intId = Integer.parseInt(id);
-        } catch(NumberFormatException e){
-            log.error("Illegal order id = " + id);
-
-            return null;
-        }
-
-        return orderDao.get(intId);
+    public static Order getOrderById(int id){
+        return orderDao.get(id);
     }
 }
