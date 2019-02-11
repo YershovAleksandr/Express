@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты поиска</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="container">
+    <hr>
+    <a href="/operator">Вернуться на страницу для оператора Call-центра</a>
+    <hr>
+    <h5 th:if="${task != null}">Заказ № <span th:text="${id}"></span> найден!</h5>
+    <h5 th:unless="${task != null}">Заказ № <span th:text="${id}"></span> не найден!</h5>
+    <hr>
+    <th:block th:if="${task != null}">
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Номер заказа</th>
+            <th>Дата</th>
+        </tr>
+        <tr>
+            <td th:text="${task.getId()}"></td>
+            <td th:text="${task.getOrderId()}"></td>
+            <td th:text="${task.getDate()}"></td>
+        </tr>
+    </table>
+    </th:block>
+    <hr>
+</div>
+</body>
+</html>
