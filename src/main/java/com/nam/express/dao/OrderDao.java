@@ -1,33 +1,30 @@
 package com.nam.express.dao;
 
 import com.nam.express.model.Order;
-import com.nam.express.util.DataSource;
+import com.nam.express.util.DataSource2;
+import com.nam.express.util.JDBCSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OrderDao {
     private static Logger log = LoggerFactory.getLogger(OrderDao.class);
 
-    public int create(Order order){
+    public void create(Order order){
         log.info("Create Order");
 
-        int status = -1;
+        SimpleJdbcInsert insert = new SimpleJdbcInsert(JDBCSource.getDataSource()).withTableName("orderdb");
 
-        try(Connection con = DataSource.getConnection()){
-            PreparedStatement pst = con.prepareStatement("INSERT INTO orderdb(orderdb_description) VALUES (?)");
+        Map<String, Object> param = new HashMap<>();
+        param.put("orderdb_description", order.getDescription());
 
-            pst.setString(1, order.getDescription());
-
-            status = pst.executeUpdate();
-        }catch (Exception e){
-            log.error("DB Error", e);
-        }
-
-        return status;
+        insert.execute(param);
     }
 
     public Order get(int id){
@@ -35,7 +32,7 @@ public class OrderDao {
 
         Order order = null;
 
-        try(Connection con = DataSource.getConnection()) {
+        try(Connection con = DataSource2.getConnection()) {
             PreparedStatement pst = con.prepareStatement("SELECT * FROM orderdb WHERE orderdb_id = ?");
             pst.setInt(1, id);
 
