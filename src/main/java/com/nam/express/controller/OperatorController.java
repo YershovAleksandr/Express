@@ -1,5 +1,6 @@
 package com.nam.express.controller;
 
+import com.nam.express.model.OperatorTask;
 import com.nam.express.service.OperatorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,13 +23,13 @@ public class OperatorController {
         return "operator";
     }
 
-    @RequestMapping("/operator")
-    public String operatorQuery(@RequestParam(value = "q")String q, Model model){
-        log.info("Query = " + q);
-        log.info("Operator tasks -> " + OperatorService.getAllTask().toString());
+    @RequestMapping("/search")
+    public String search(@RequestParam(value = "id")String id, Model model){
+        log.info("Search Order Id = " + id);
 
-        model.addAttribute("taskList", OperatorService.getTaskByQuery(q));
+        model.addAttribute("task", OperatorService.getTaskByOrderId(id));
+        model.addAttribute("id", id);
 
-        return "operator";
+        return "operatorsearch";
     }
 }
