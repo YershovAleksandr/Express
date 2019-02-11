@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class DataSource {
-    private static Logger log = LoggerFactory.getLogger(DataSource.class);
+public class DataSource2 {
+    private static Logger log = LoggerFactory.getLogger(DataSource2.class);
 
     private static String driver = "com.mysql.cj.jdbc.Driver";
     private static String url = "jdbc:mysql://localhost:3306/express?useUnicode=true&characterEncoding=utf-8";
