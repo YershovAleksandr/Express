@@ -43,21 +43,9 @@ public class CourierTaskDao {
         insert.execute(param);
     }
 
-    public int deleteByOrderId(int id){
+    public void deleteByOrderId(int id){
         log.info("Delete Courier Task");
 
-        int status = -1;
-
-        try(Connection con = DataSource2.getConnection()){
-            PreparedStatement pst = con.prepareStatement("DELETE FROM courierdb WHERE courierdb_orderid = ?");
-
-            pst.setInt(1, id);
-
-            status = pst.executeUpdate();
-        }catch (Exception e){
-            log.error("DB Error", e);
-        }
-
-        return status;
+        jdbcTemplate.update("DELETE FROM courierdb WHERE courierdb_orderid = ?", id);
     }
 }
