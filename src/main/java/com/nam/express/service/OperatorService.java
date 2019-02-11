@@ -16,8 +16,18 @@ public class OperatorService {
         return operatorTaskDao.getAll();
     }
 
-    public static List<OperatorTask> getTaskByQuery(String query){
-        return operatorTaskDao.get(query);
+    public static OperatorTask getTaskByOrderId(String id){
+        int intId;
+
+        try {
+            intId = Integer.parseInt(id);
+        } catch(NumberFormatException e){
+            log.error("Illegal id = " + id);
+
+            return null;
+        }
+
+        return operatorTaskDao.get(intId);
     }
 
     public static void createTaskByOrder(Order order){

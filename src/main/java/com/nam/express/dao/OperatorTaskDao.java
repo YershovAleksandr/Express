@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
@@ -23,11 +24,17 @@ public class OperatorTaskDao {
         return jdbcTemplate.query("SELECT * FROM operatordb", new OperatorTaskMapper());
     }
 
-    public List<OperatorTask> get(String query){
-        log.info("Get Task Operator Query = " + query);
-        //TODO
+    public OperatorTask get(int id){
+        log.info("Get Operator Task id = " + id);
 
-        return null;
+        OperatorTask operatorTask = null;
+        try {
+            operatorTask = jdbcTemplate.queryForObject("SELECT * FROM operatordb where operatordb_orderid = ?", new Object[]{id}, new OperatorTaskMapper());
+        }catch (Exception e){
+            log.warn("Not Found");
+        }
+
+        return  operatorTask;
     }
 
     public void createByOrderId(int id){
